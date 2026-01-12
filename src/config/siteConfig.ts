@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
   heroSection: {
     headline: "Gentle, Family-Friendly Dental Care",
     subheadline: "Compassionate care, modern technology, and a calm environment for the whole family.",
-    imageUrl: "/images/hero-placeholder.svg",
+    imageUrl: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=800&fit=crop&q=80",
     imageAlt: "Friendly dental team welcoming a patient",
     callToActionLabel: "Book an Appointment"
   },
@@ -65,11 +65,30 @@ export const siteConfig: SiteConfig = {
 
   imageSearchHints: {
     hero: "family at dentist smiling",
+    heroUrls: [
+      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&h=800&fit=crop&q=80"
+    ],
     services: [
       "dentist with patient in chair",
       "dental hygienist cleaning teeth",
       "child at pediatric dentist",
       "dentist explaining x-ray to patient"
+    ],
+    teamFemale: [
+      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face&q=80",
+      "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=face&q=80",
+      "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=400&h=400&fit=crop&crop=face&q=80"
+    ],
+    teamMale: [
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face&q=80",
+      "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=400&fit=crop&crop=face&q=80",
+      "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop&crop=face&q=80"
+    ],
+    office: [
+      "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&h=600&fit=crop&q=80"
     ]
   }
 };
