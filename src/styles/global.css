@@ -15,7 +15,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold tracking-tight;
+    font-family: 'Playfair Display', Georgia, serif;
+    @apply font-semibold tracking-tight;
   }
 
   h1 {
@@ -41,7 +42,8 @@
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-heading font-semibold text-center mb-4;
+    font-family: 'Playfair Display', Georgia, serif;
+    @apply text-3xl md:text-4xl font-semibold text-center mb-4;
     color: var(--color-primary);
   }
 
