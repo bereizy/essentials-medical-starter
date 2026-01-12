@@ -1,0 +1,85 @@
+---
+const insuranceProviders = [
+  "Delta Dental",
+  "BlueCross BlueShield",
+  "Aetna",
+  "Cigna",
+  "United Healthcare",
+  "MetLife"
+];
+---
+
+<div class="max-w-5xl mx-auto px-4">
+  <h2 class="section-title">Insurance & Payment Options</h2>
+  <p class="section-subtitle">
+    We believe everyone deserves quality dental care. We work with most major insurance providers and offer flexible payment solutions.
+  </p>
+  
+  <div class="card mb-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Insurance Info -->
+      <div>
+        <h3 class="text-xl font-heading font-semibold mb-4" style="color: var(--color-primary);">
+          Insurance Plans Accepted
+        </h3>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+          We accept most major dental insurance plans. Our friendly team will help you understand your coverage and maximize your benefits.
+        </p>
+        <ul class="space-y-2 text-gray-600">
+          <li class="flex items-center gap-2">
+            <span style="color: var(--color-accent);">✓</span>
+            We file claims on your behalf
+          </li>
+          <li class="flex items-center gap-2">
+            <span style="color: var(--color-accent);">✓</span>
+            Help you understand your benefits
+          </li>
+          <li class="flex items-center gap-2">
+            <span style="color: var(--color-accent);">✓</span>
+            Maximize your insurance coverage
+          </li>
+        </ul>
+      </div>
+      
+      <!-- No Insurance Info -->
+      <div>
+        <h3 class="text-xl font-heading font-semibold mb-4" style="color: var(--color-primary);">
+          No Insurance? No Problem.
+        </h3>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+          We offer flexible payment options and an in-house membership plan for patients without dental insurance.
+        </p>
+        <ul class="space-y-2 text-gray-600">
+          <li class="flex items-center gap-2">
+            <span style="color: var(--color-accent);">✓</span>
+            Affordable membership plans
+          </li>
+          <li class="flex items-center gap-2">
+            <span style="color: var(--color-accent);">✓</span>
+            Flexible payment arrangements
+          </li>
+          <li class="flex items-center gap-2">
+            <span style="color: var(--color-accent);">✓</span>
+            CareCredit financing available
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Insurance Provider Logos -->
+  <div>
+    <p class="text-center text-sm text-gray-500 mb-6 font-medium uppercase tracking-wide">
+      Accepted Insurance Providers
+    </p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+      {insuranceProviders.map((provider) => (
+        <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center min-h-[80px] border border-gray-100">
+          <span class="text-sm font-medium text-gray-600 text-center">
+            {provider}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

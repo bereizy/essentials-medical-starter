@@ -1,0 +1,137 @@
+---
+import { Navbar, Hero, ServicesGrid, ContactForm } from "@indirecttek/essentials-engine";
+import { siteConfig } from "../config/siteConfig";
+import TrustBand from "../components/TrustBand.astro";
+import TeamSection from "../components/TeamSection.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import InsurancePanel from "../components/InsurancePanel.astro";
+import LocationSection from "../components/LocationSection.astro";
+import "../styles/global.css";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={siteConfig.seo.description} />
+    <meta name="robots" content="index, follow" />
+    
+    <meta property="og:title" content={siteConfig.seo.title} />
+    <meta property="og:description" content={siteConfig.seo.description} />
+    <meta property="og:type" content="website" />
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="/" />
+    
+    <title>{siteConfig.seo.title}</title>
+  </head>
+  
+  <body 
+    class="bg-[color:var(--color-background)] text-[color:var(--color-foreground)] min-h-screen"
+    style={`
+      --color-primary: ${siteConfig.theme.primary};
+      --color-secondary: ${siteConfig.theme.secondary};
+      --color-accent: ${siteConfig.theme.accent};
+      --color-background: ${siteConfig.theme.background};
+      --color-foreground: ${siteConfig.theme.foreground};
+    `}
+  >
+    <Navbar config={siteConfig} />
+
+    <main class="space-y-0">
+      <!-- Hero Section -->
+      <section class="bg-white">
+        <Hero config={siteConfig} />
+      </section>
+
+      <!-- Trust Band -->
+      <TrustBand />
+
+      <!-- Services Section -->
+      <section id="services" class="section-padding bg-white">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="section-title">Our Services</h2>
+          <p class="section-subtitle">
+            Comprehensive dental care for your entire family, delivered with compassion and expertise.
+          </p>
+          <ServicesGrid config={siteConfig} />
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section id="team" class="section-padding" style="background-color: var(--color-background);">
+        <TeamSection />
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="section-padding bg-white">
+        <TestimonialsSection />
+      </section>
+
+      <!-- Insurance Panel -->
+      <section class="section-padding" style="background-color: var(--color-background);">
+        <InsurancePanel />
+      </section>
+
+      <!-- Location Section -->
+      <section id="location" class="section-padding bg-white">
+        <LocationSection />
+      </section>
+
+      <!-- Contact Form Section -->
+      <section id="contact" class="section-padding" style="background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 5%, white), color-mix(in srgb, var(--color-secondary) 8%, white));">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="section-title">Book Your Appointment</h2>
+          <p class="section-subtitle">
+            Ready to experience gentle, personalized dental care? Fill out the form below and we'll be in touch shortly.
+          </p>
+          <div class="card">
+            <ContactForm config={siteConfig} />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h3 class="text-white font-heading text-xl font-semibold mb-4">{siteConfig.businessName}</h3>
+            <p class="text-sm leading-relaxed text-gray-400">
+              Providing gentle, compassionate dental care for families in Fuquay-Varina and the surrounding Raleigh area.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-4">Contact</h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href={`tel:${siteConfig.contactInfo.phone.replace(/[^0-9]/g, '')}`} class="hover:text-white transition-colors">
+                  {siteConfig.contactInfo.phone}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${siteConfig.contactInfo.email}`} class="hover:text-white transition-colors">
+                  {siteConfig.contactInfo.email}
+                </a>
+              </li>
+              <li class="text-gray-400">{siteConfig.contactInfo.address}</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-4">Hours</h4>
+            <ul class="space-y-1 text-sm text-gray-400">
+              <li>Monday – Thursday: 8am – 5pm</li>
+              <li>Friday: 8am – 2pm</li>
+              <li>Saturday – Sunday: Closed</li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+          <p>© {new Date().getFullYear()} {siteConfig.businessName}. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

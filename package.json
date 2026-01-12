@@ -1,0 +1,25 @@
+{
+  "name": "essentials-medical-starter",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Premium medical/dental website starter template powered by @indirecttek/essentials-engine",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.0",
+    "@indirecttek/essentials-engine": "^1.0.0",
+    "astro": "^4.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.0"
+  }
+}
