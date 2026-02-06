@@ -1,0 +1,280 @@
+---
+import { siteConfig } from "../config/siteConfig";
+import "../styles/global.css";
+
+// Code examples as strings to avoid Astro parsing issues
+const codeResend = `npx wrangler pages secret put RESEND_API_KEY
+# Paste your Resend API key when prompted
+
+npx wrangler pages secret put CONTACT_EMAIL
+# Enter the email where you want to receive messages
+
+npx wrangler pages secret put BUSINESS_NAME
+# Enter your practice name`;
+
+const codeNexHealth = `integrations: \{
+  scheduling: \{
+    provider: "nexhealth",
+    practiceSlug: "your-practice-name", // From your NexHealth URL
+    buttonText: "Request Appointment",
+  \},
+  // ...
+\}`;
+
+const codeNexHealthAPI = `// For advanced integration with NexHealth API
+// Visit: https://docs.nexhealth.com/reference/introduction
+// API Quickstart: https://github.com/nex-health/api-quickstart`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setup Guide | {siteConfig.businessName}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+      .font-sans { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+  </head>
+
+  <body class="bg-[#faf8f5] text-gray-900 min-h-screen font-sans">
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <header class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-[#58b1ac] rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <span class="font-serif text-xl font-semibold">{siteConfig.businessName}</span>
+        </div>
+        <h1 class="font-serif text-3xl font-bold text-gray-900 mb-2">
+          Practice Setup Guide
+        </h1>
+        <p class="text-gray-600">
+          Follow these steps to configure your dental practice website integrations.
+        </p>
+      </header>
+
+      <!-- Quick Start -->
+      <section class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-sm font-bold">✓</span>
+          What's Already Working
+        </h2>
+        <ul class="space-y-2 text-gray-600">
+          <li class="flex items-center gap-2">
+            <span class="text-green-600">✓</span> Website is live and accessible
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-green-600">✓</span> SEO and structured data for dental practices
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-green-600">✓</span> Mobile responsive design
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-green-600">✓</span> Provider bio and credentials section
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-green-600">✓</span> Insurance list display
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-green-600">✓</span> Contact form ready (needs email setup)
+          </li>
+        </ul>
+      </section>
+
+      <!-- Email Setup (Resend) -->
+      <section class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-bold">1</span>
+          Contact Form Email Setup (Resend)
+        </h2>
+        <p class="text-gray-600 mb-4">
+          When patients fill out your contact form, you'll receive an email. Here's how to set it up:
+        </p>
+        <ol class="space-y-4 text-gray-700">
+          <li class="pl-6 border-l-2 border-blue-200">
+            <strong>Create a Resend account</strong>
+            <p class="text-gray-600 text-sm mt-1">
+              Go to <a href="https://resend.com/signup" target="_blank" class="text-blue-600 underline">resend.com/signup</a> and create a free account
+            </p>
+          </li>
+          <li class="pl-6 border-l-2 border-blue-200">
+            <strong>Get your API key</strong>
+            <p class="text-gray-600 text-sm mt-1">
+              In Resend dashboard, go to API Keys and Create API Key
+            </p>
+          </li>
+          <li class="pl-6 border-l-2 border-blue-200">
+            <strong>Add secrets to Cloudflare</strong>
+            <p class="text-gray-600 text-sm mt-1">Run these commands in your terminal:</p>
+            <pre class="bg-gray-900 text-green-400 p-3 rounded-lg text-sm mt-2 overflow-x-auto">{codeResend}</pre>
+          </li>
+        </ol>
+      </section>
+
+      <!-- NexHealth Setup -->
+      <section class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-8 h-8 bg-[#58b1ac]/20 rounded-full flex items-center justify-center text-[#58b1ac] text-sm font-bold">2</span>
+          Online Scheduling (NexHealth)
+        </h2>
+        <p class="text-gray-600 mb-4">
+          Let patients book appointments online with HIPAA-compliant scheduling that syncs with your practice management system.
+        </p>
+
+        <div class="bg-[#58b1ac]/5 border border-[#58b1ac]/20 rounded-xl p-4 mb-6">
+          <h3 class="font-semibold text-[#3d8a86] mb-2">Why NexHealth?</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li>• <strong>HIPAA Compliant</strong> - Secure patient data handling</li>
+            <li>• <strong>EHR Integration</strong> - Syncs with Dentrix, Eaglesoft, Open Dental & more</li>
+            <li>• <strong>Automated Reminders</strong> - Reduce no-shows with text/email reminders</li>
+            <li>• <strong>Real-time Availability</strong> - Shows actual provider availability</li>
+          </ul>
+        </div>
+
+        <ol class="space-y-4 text-gray-700">
+          <li class="pl-6 border-l-2 border-[#58b1ac]/30">
+            <strong>Sign up for NexHealth</strong>
+            <p class="text-gray-600 text-sm mt-1">
+              Contact <a href="https://www.nexhealth.com/pricing" target="_blank" class="text-[#58b1ac] underline">nexhealth.com</a> to set up your practice account
+            </p>
+          </li>
+          <li class="pl-6 border-l-2 border-[#58b1ac]/30">
+            <strong>Install the Synchronizer</strong>
+            <p class="text-gray-600 text-sm mt-1">
+              NexHealth will help you install their Synchronizer software to connect with your practice management system
+            </p>
+          </li>
+          <li class="pl-6 border-l-2 border-[#58b1ac]/30">
+            <strong>Get your practice slug</strong>
+            <p class="text-gray-600 text-sm mt-1">
+              Your booking URL will look like: https://app.nexhealth.com/appt/<strong>your-practice-name</strong>
+            </p>
+          </li>
+          <li class="pl-6 border-l-2 border-[#58b1ac]/30">
+            <strong>Update your site config</strong>
+            <p class="text-gray-600 text-sm mt-1">
+              In src/config/siteConfig.ts, update:
+            </p>
+            <pre class="bg-gray-900 text-green-400 p-3 rounded-lg text-sm mt-2 overflow-x-auto">{codeNexHealth}</pre>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Alternative Scheduling -->
+      <section class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 text-sm font-bold">?</span>
+          Alternative Scheduling Options
+        </h2>
+        <p class="text-gray-600 mb-4">
+          If NexHealth isn't the right fit, you can also use:
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border border-gray-200 rounded-xl p-4">
+            <h3 class="font-semibold text-gray-900 mb-2">ZocDoc</h3>
+            <p class="text-sm text-gray-600">
+              Popular healthcare marketplace. Great for patient discovery.
+              <a href="https://www.zocdoc.com/professionals" target="_blank" class="text-blue-600 underline">Learn more</a>
+            </p>
+          </div>
+          <div class="border border-gray-200 rounded-xl p-4">
+            <h3 class="font-semibold text-gray-900 mb-2">Calendly</h3>
+            <p class="text-sm text-gray-600">
+              Simple scheduling (not HIPAA compliant). Good for consultations only.
+              <a href="https://calendly.com" target="_blank" class="text-blue-600 underline">Learn more</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Update Practice Info -->
+      <section class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-sm font-bold">3</span>
+          Customize Your Practice Info
+        </h2>
+        <p class="text-gray-600 mb-4">
+          Update the following in <code class="bg-gray-100 px-2 py-1 rounded text-sm">src/config/siteConfig.ts</code>:
+        </p>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-start gap-2">
+            <span class="text-amber-600 mt-1">•</span>
+            <div>
+              <strong>Provider Info</strong>
+              <p class="text-gray-600 text-sm">Update doctor name, credentials, bio, and photo URL</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-amber-600 mt-1">•</span>
+            <div>
+              <strong>Accepted Insurance</strong>
+              <p class="text-gray-600 text-sm">Update the list of insurance providers you accept</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-amber-600 mt-1">•</span>
+            <div>
+              <strong>Office Hours</strong>
+              <p class="text-gray-600 text-sm">Update your practice hours and emergency contact</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-amber-600 mt-1">•</span>
+            <div>
+              <strong>Services</strong>
+              <p class="text-gray-600 text-sm">Customize the services list to match your offerings</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- API Integration -->
+      <section class="bg-gradient-to-br from-[#58b1ac]/10 to-[#d4a574]/10 border border-[#58b1ac]/20 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span>🔌</span> Advanced: NexHealth API Integration
+        </h2>
+        <p class="text-gray-600 mb-4">
+          For deeper integration (custom booking UI, EHR sync, patient data), you can use the NexHealth Synchronizer API:
+        </p>
+        <pre class="bg-gray-900 text-green-400 p-3 rounded-lg text-sm overflow-x-auto">{codeNexHealthAPI}</pre>
+        <p class="text-gray-600 text-sm mt-4">
+          The API connects to 20+ dental practice management systems with one unified interface.
+        </p>
+      </section>
+
+      <!-- Testing -->
+      <section class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-yellow-800 mb-4 flex items-center gap-2">
+          <span>⚠️</span> Testing Checklist
+        </h2>
+        <ul class="space-y-2 text-yellow-800">
+          <li>• <strong>Contact form:</strong> Submit a test message to verify emails arrive</li>
+          <li>• <strong>Scheduling:</strong> Test the booking flow to ensure it opens correctly</li>
+          <li>• <strong>Mobile:</strong> Check the site on your phone</li>
+          <li>• <strong>Provider bio:</strong> Verify doctor info and photo display correctly</li>
+        </ul>
+      </section>
+
+      <!-- Need Help -->
+      <section class="bg-green-50 border border-green-200 rounded-2xl p-6">
+        <h2 class="text-xl font-bold text-green-800 mb-2">Need Help?</h2>
+        <p class="text-green-700">
+          If you get stuck, email us at <a href="mailto:support@getyours.site" class="underline">support@getyours.site</a> and we'll help you get set up.
+        </p>
+      </section>
+
+      <footer class="mt-12 text-center text-gray-500 text-sm">
+        <a href="/" class="text-[#58b1ac] underline">Back to your website</a>
+      </footer>
+    </div>
+  </body>
+</html>
